@@ -4,6 +4,7 @@
 #include "cppdict/include/dict.hpp"
 #include "cppfunctions.hpp"
 
+#include <pybind11/pybind11.h>
 
 #include <string>
 
@@ -13,5 +14,6 @@ using PHAREDict = cppdict::Dict<int, double, std::string, cppfunctions::ScalarFu
                                 cppfunctions::VectorFunction<dim>>;
 
 extern PHAREDict<1> phareDict;
+
 
 #endif
