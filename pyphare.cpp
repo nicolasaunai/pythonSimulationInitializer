@@ -7,6 +7,8 @@
 #include <variant>
 #include <vector>
 
+#include <pybind11/functional.h>
+
 PHAREDict<1> phareDict;
 
 
@@ -26,6 +28,6 @@ PYBIND11_MODULE(pyphare, m)
     m.def("add", add<int, void>, "add");
     m.def("add", add<double, void>, "add");
     m.def("add", add<std::string, void>, "add");
-    // m.def("add", add<cppfunctions::ScalarFunction<1>, void>, "add");
-    // m.def("add", add<cppfunctions::VectorFunction<1>, void>, "add");
+    m.def("add", add<cppfunctions::ScalarFunction<1>, void>, "add");
+    m.def("add", add<cppfunctions::VectorFunction<1>, void>, "add");
 }
