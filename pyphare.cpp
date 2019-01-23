@@ -20,11 +20,6 @@ void add(std::string path, T&& value)
 }
 
 
-void f()
-{
-    add<double, void>("toto", 2.5);
-}
-
 
 PYBIND11_MODULE(pyphare, m)
 {
