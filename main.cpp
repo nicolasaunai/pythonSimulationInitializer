@@ -2,6 +2,7 @@
 
 #include "cppdict/include/dict.hpp"
 #include "cppfunctions.hpp"
+#include "pyphare.h"
 
 
 #include <pybind11/embed.h> // everything needed for embedding
@@ -11,10 +12,6 @@ namespace py = pybind11;
 
 #include <cstddef>
 #include <string>
-
-template<std::size_t dim>
-using MyDict = cppdict::Dict<int, double, std::string, cppfunctions::ScalarFunction<dim>,
-                             cppfunctions::VectorFunction<dim>>;
 
 
 
@@ -26,6 +23,8 @@ int main()
     py::print(scipy.attr("__version__"));
     py::print("Hello, World!"); // use the Python API
 
+
+
     auto init                               = py::module::import("init");
     py::object densityFunc                  = init.attr("density");
     cppfunctions::ScalarFunction<1> density = densityFunc.cast<cppfunctions::ScalarFunction<1>>();
@@ -33,6 +32,8 @@ int main()
     auto n = density(5);
     std::cout << n << "\n";
 
-    MyDict<1> d;
-    d["simulation"]["ions"]["protons"]["fluidInitializer"]["density"] = density;
+    phareDict["simulation"]["ions"]["protons"]["fluidInitializer"]["density"] = density;
+    //
+    add("toto/tata/titi", 2.5);
+    std::cout << "at toto/tata/titi : " << phareDict["toto"]["tata"]["titi"].to<double>() << "\n";
 }

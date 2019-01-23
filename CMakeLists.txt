@@ -25,7 +25,7 @@ endif()
 
 set(PYBIND11_CPP_STANDARD -std=c++17)
 
+pybind11_add_module(pyphare pyphare.cpp pyphare.h cppfunctions.hpp)
 
-
-add_executable(initializer main.cpp cppfunctions.hpp)
+add_executable(initializer main.cpp cppfunctions.hpp pyphare.cpp pyphare.h)
 target_link_libraries(initializer PUBLIC pybind11::embed)
