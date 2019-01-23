@@ -1,4 +1,3 @@
-[submodule "external/cppdict"]
-    path = external/cppdict
-    url = https://github.com/nicolasaunai/cppdict
-
+[submodule "cppdict"]
+	path = cppdict
+	url = https://github.com/nicolasaunai/cppdict

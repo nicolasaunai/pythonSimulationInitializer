@@ -5,6 +5,27 @@ project(python_simu_initializer)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(initializer main.cpp)
-:x
-:x
+find_package(pybind11)
+
+if (NOT pybind11_FOUND)
+
+    message("downloading subproject pybind11")
+    set(PYBIND11_SRCDIR ${CMAKE_CURRENT_SOURCE_DIR}/pybind11)
+
+    if (NOT EXISTS ${PYBIND11_SRCDIR})
+      execute_process(
+        COMMAND ${Git} clone https://github.com/pybind/pybind11 ${PYBIND11_SRCDIR}
+        )
+    endif()
+
+
+        add_subdirectory(${PYBIND11_SRCDIR})
+
+endif()
+
+set(PYBIND11_CPP_STANDARD -std=c++17)
+
+
+
+add_executable(initializer main.cpp cppfunctions.hpp)
+target_link_libraries(initializer PUBLIC pybind11::embed)
