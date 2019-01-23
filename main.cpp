@@ -24,7 +24,6 @@ int main()
     py::print("Hello, World!"); // use the Python API
 
 
-
     auto init                               = py::module::import("init");
     py::object densityFunc                  = init.attr("density");
     cppfunctions::ScalarFunction<1> density = densityFunc.cast<cppfunctions::ScalarFunction<1>>();
@@ -34,6 +33,6 @@ int main()
 
     phareDict["simulation"]["ions"]["protons"]["fluidInitializer"]["density"] = density;
     //
-    add("toto/tata/titi", 2.5);
+    cppdict::add("toto/tata/titi", 2.5, phareDict);
     std::cout << "at toto/tata/titi : " << phareDict["toto"]["tata"]["titi"].to<double>() << "\n";
 }
