@@ -1,0 +1,5 @@
+
+[submodule "external/cppdict"]
+    path = external/cppdict
+    url = https://github.com/nicolasaunai/cppdict
+
