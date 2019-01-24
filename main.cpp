@@ -13,18 +13,29 @@ namespace py = pybind11;
 #include <cstddef>
 #include <string>
 
-
-
-
-int main()
+void prepare()
 {
-    py::scoped_interpreter guard{}; // start the interpreter and keep it alive
-    py::object scipy = py::module::import("scipy");
-    py::print(scipy.attr("__version__"));
-    py::print("Hello, World!"); // use the Python API
+    py::object scope = py::module::import("__main__").attr("__dict__");
+    py::eval_file("setpythonpath.py", scope);
+}
+
+py::scoped_interpreter guard{}; // start the interpreter and keep it alive
 
 
-    auto init                               = py::module::import("init");
+int main(int argc, char** argv)
+{
+    std::string module = "job.py";
+    if (argc == 2)
+    {
+        module = argv[1];
+    }
+
+    module.erase(module.find("."), module.size() - 1);
+
+    prepare();
+
+    auto init = py::module::import(module.c_str());
+
     py::object densityFunc                  = init.attr("density");
     cppfunctions::ScalarFunction<1> density = densityFunc.cast<cppfunctions::ScalarFunction<1>>();
 

@@ -25,6 +25,8 @@ endif()
 
 set(PYBIND11_CPP_STANDARD -std=c++17)
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/setpythonpath.py.in ${CMAKE_CURRENT_BINARY_DIR}/setpythonpath.py @ONLY)
+
 pybind11_add_module(pyphare pyphare.cpp pyphare.h cppfunctions.hpp)
 
 add_executable(initializer main.cpp cppfunctions.hpp pyphare.cpp pyphare.h)
